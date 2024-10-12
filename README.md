@@ -9,3 +9,4 @@ Currently, two official plugins are available:
 "# inventary" 
 "# inventary-2" 
 "# inventary-2" 
+"# inventary-2" 
