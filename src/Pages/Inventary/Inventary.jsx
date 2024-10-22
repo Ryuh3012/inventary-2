@@ -1,10 +1,10 @@
 import { getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
-import Cash from "../../assets/cash.png";
-import promer from "../../assets/promedio.png";
 import ModalCreate from "../../components/modalCreate";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import CardInfo from "../../components/CardInfo";
+import ButtonExce from "../../components/buttonExcel";
 
 
 const columns = [
@@ -32,15 +32,10 @@ const columns = [
     key: "prince",
     label: "monto",
   },
-  {
-    key: "actions",
-    label: "accion",
-  },
 ];
 const Inventary = () => {
   const [info, setInfo] = useState()
   const [state, setstate] = useState();
-
 
   const loadGet = async () => {
 
@@ -57,58 +52,45 @@ const Inventary = () => {
   }, []);
 
   return (
-    <div className=' container p-4 flex flex-col gap-6'>
-      <h1 className="text-5xl font-mono ">Inventario</h1>
-      <div className=" flex justify-between">
-        <div className=" bg-white  w-[40%]  rounded-lg shadow-lg divide-y divide-blue-100">
-          <div className="flex flex-col justify-center items-center">
-            <img src={Cash} className="w-[60px]" />
-            <p className="text-1xl text-green-700">Ingresos Mensuales Promedio</p>
-          </div>
-          <div className="flex justify-center items-center">
-            <h2 className="text-3xl font-bold text-green-600"> $0</h2>
-          </div>
-        </div >
-        <div className="bg-white p-2 w-[40%]  rounded-lg shadow-lg divide-y divide-blue-100">
-          <div className="flex flex-col justify-center items-center">
-            <img src={promer} className="w-[50px] " />
-            <p className="text-1xl text-blue-700">Ventas Mensuales Promedio</p>
-          </div>
-          <div className="flex justify-center items-center">
-            <h2 className="text-3xl font-bold"> 0</h2>
+    <div>
+      <section className="container mx-auto lg:h-[calc(100vh-4rem)] p-10 flex flex-nowrap ">
+        <div className='bg-[#507142]  rounded-[5px] shadow-md p-5 w-full border-[1px] border-[#C4CEDC]'>
+          <h1 className="text-5xl font-mono text-white">Inventario</h1>
+          <div>
+            <CardInfo />
+            <div className="flex justify-end p-1">
+              <ButtonExce />
+              < ModalCreate close={info} isOpen={setInfo} placement="top-center" />
+            </div>
+            <Table aria-label="Example table with dynamic content">
+              <TableHeader columns={columns}
+              >
+                {(column) =>
+                  <TableColumn key={column.key}>{column.label}</TableColumn>}
+              </TableHeader>
+              <TableBody items={state}>
+                {
+                  state?.map(user => (
+                    <TableRow key={user._id}>
+
+                      {(columnKey) => {
+                        // if (columnKey === 'edit') return <TableCell><ModalCases data={data} close={info} isOpen={setInfo} /></TableCell>
+                        return <TableCell>{getKeyValue(user, columnKey)}</TableCell>
+                      }}
+
+                    </TableRow>
+                  ))
+
+                }
+
+              </TableBody>
+            </Table>
+
+
           </div>
         </div>
-      </div>
-      <div>
-        <div className="flex  justify-end">
-          < ModalCreate close={info} isOpen={setInfo} placement="top-center" />
-        </div>
-        <Table aria-label="Example table with dynamic content">
-          <TableHeader columns={columns}
-          >
-            {(column) =>
-              <TableColumn key={column.key}>{column.label}</TableColumn>}
-          </TableHeader>
-          <TableBody items={state}>
-            {
-              state?.map(user => (
-                <TableRow key={user._id}>
+      </section>
 
-                  {(columnKey) => {
-                    // if (columnKey === 'edit') return <TableCell><ModalCases data={data} close={info} isOpen={setInfo} /></TableCell>
-                    return <TableCell>{getKeyValue(user, columnKey)}</TableCell>
-                  }}
-
-                </TableRow>
-              ))
-
-            }
-
-          </TableBody>
-        </Table>
-
-
-      </div>
 
     </div>
   );

@@ -31,4 +31,3 @@ const Navegation = () => {
 }
 
 export default Navegation;
-

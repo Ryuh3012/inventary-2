@@ -12,10 +12,9 @@ const ModalCreate = () => {
 
         initialValues,
         onSubmit: async (value, { resetForm }) => {
-            const { name, dni, paymentType, prince, reference, product } = value
+            const { name, dni, paymentType, prince, reference } = value
             const date = new Date().toLocaleDateString()
             try {
-
                 const data = await axios.post('http://localhost:3000/product', {
                     data: {
                         name,
@@ -23,7 +22,6 @@ const ModalCreate = () => {
                         paymentType,
                         prince,
                         reference,
-                        product,
                         date
 
 
@@ -121,18 +119,7 @@ const ModalCreate = () => {
                                             onBlur={handleBlur}
                                         />
                                     </div>
-                                    <div>
-                                        <label htmlFor="product">Productos</label>
-                                    <textarea
-                                     type="number"
-                                     className='w-full border-[1px] border-[#C4CEDC] px-5 py-2 rounded-[5px] resize-none'
-                                     name="product"
-                                     rows='5'
-                                     value={values.product}
-                                     onChange={handleChange}
-                                     onBlur={handleBlur}
-                                    />
-                                    </div>
+                                   
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button color="danger" variant="light" onPress={onClose}>
