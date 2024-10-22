@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import { connectdb } from "./src/db/connectdb.mjs";
-import userRouter from "./src/routes/userRouter.mjs";
+import userRouter from "./src/routes/usersRoute.mjs";
+import inventaryRoute from "./src/routes/inventaryRoute.mjs";
 const app = express()
 const port = 3000
 
@@ -13,6 +14,7 @@ try {
     app.use(express.json())
     app.use(express.urlencoded({ extended: false }))
 
+    app.use(inventaryRoute)
     app.use(userRouter)
 
     app.listen(port, () => {

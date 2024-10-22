@@ -9,6 +9,7 @@ const serveSchema = mongoose.Schema({
     reference: Number,
     product: String,
     date: String,
+    user: String
 }, { versionKey: false })
 
 

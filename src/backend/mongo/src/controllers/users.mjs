@@ -1,15 +1,13 @@
-import { serve } from "../server/server.mjs"
+import { serve } from "../server/usuarios.mjs"
 
 
 export const newUsers = async (req, res) => {
     const data = await req?.body.data
     const newUser = new serve(data)
     const resp = await newUser.save()
-    
+
     return res.status(200).json({
-
         "message": `el usuario  ha sido creado`
-
     })
 }
 export const getUsers = async (req, res) => {
@@ -36,9 +34,9 @@ export const getUser = async (req, res) => {
 export const userUpdate = async (req, res) => {
 
     const { id } = await req.params
-    const {nombre, pais} = await req?.body
+    const { nombre, pais } = await req?.body
     const update = await serve.updateOne({ _id: id }, {
-        $set:{
+        $set: {
             nombre: nombre,
             pais: pais
         }

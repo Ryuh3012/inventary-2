@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { getUser, getUsers, newUsers, userDelete, userUpdate } from "../controllers/user.mjs";
-
+import { getUser, getUsers, newUsers, userDelete, userUpdate } from "../controllers/products.mjs";
 const router = Router()
 
 router.post('/product', newUsers)
