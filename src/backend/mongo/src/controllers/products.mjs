@@ -38,10 +38,7 @@ export const userUpdate = async (req, res) => {
     const { id } = await req.params
     const {nombre, pais} = await req?.body
     const update = await serve.updateOne({ _id: id }, {
-        $set:{
-            nombre: nombre,
-            pais: pais
-        }
+        $set
 
     })
     console.log(update)

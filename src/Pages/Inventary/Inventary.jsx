@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import CardInfo from "../../components/CardInfo";
 import ButtonExce from "../../components/buttonExcel";
+import Layout from "../../auth/Layout";
 
 
 const columns = [
@@ -52,7 +53,7 @@ const Inventary = () => {
   }, []);
 
   return (
-    <div className="bg-[#1F6C4C]">
+    <Layout>
       <section className="container mx-auto lg:h-[calc(100vh-4rem)] p-10  ">
         <div className='bg-[#507142]  rounded-[5px] shadow-md p-5 w-full border-[1px] border-[#C4CEDC]'>
           <h1 className="text-5xl font-mono text-white">Inventario</h1>
@@ -90,9 +91,7 @@ const Inventary = () => {
           </div>
         </div>
       </section>
-
-
-    </div>
+    </Layout>
   );
 }
 

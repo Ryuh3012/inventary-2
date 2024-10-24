@@ -83,8 +83,6 @@ const UsersVali = () => {
           </div>
         </div>
       </section>
-
-
     </div>
   );
 }

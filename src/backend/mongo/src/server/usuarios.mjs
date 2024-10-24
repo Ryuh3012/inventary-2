@@ -7,6 +7,7 @@ const serveSchema = Schema({
     post: String,
     vouchers: Number,
     prince: String,
+    password: String,
     date: String,
 }, { versionKey: false })
 
