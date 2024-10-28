@@ -26,7 +26,7 @@ const CardInfo = () => {
     )
 
     return (
-        <div className=" flex justify-between py-3 gap-6 flex sm:flex-nowrap">
+        <div className="flex justify-between py-3 gap-6 flex sm:flex-nowrap">
             <div className=" flex flex-col justify-center items-center w-[25%] gap-1 bg-white rounded-lg shadow-lg ">
                 <img src={cash} className='w-[25%]' />
                 <h1 className='lg:text-2xl font-bold sm:text-base'>{princeDiary}$</h1>

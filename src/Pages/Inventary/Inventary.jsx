@@ -1,12 +1,11 @@
 import { getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
 import ModalCreate from "../../components/modalCreate";
-import { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
+import Layout from "../Layout";
 import CardInfo from "../../components/CardInfo";
 import ButtonExce from "../../components/buttonExcel";
-import Layout from "../../auth/Layout";
-
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 const columns = [
   {
@@ -34,9 +33,11 @@ const columns = [
     label: "monto",
   },
 ];
+
 const Inventary = () => {
+
   const [info, setInfo] = useState()
-  const [state, setstate] = useState();
+  const [getData, setGetDatas] = useState();
 
   const loadGet = async () => {
 
@@ -44,17 +45,18 @@ const Inventary = () => {
 
     return data
   }
+
   useEffect(() => {
 
     return async () => {
       const data = await loadGet()
-      setstate(data)
+      setGetDatas(data)
     };
   }, []);
 
   return (
     <Layout>
-      <section className="container mx-auto lg:h-[calc(100vh-4rem)] p-10  ">
+      <section className="container mx-auto lg:h-[calc(100vh-4rem)] p-10">
         <div className='bg-[#507142]  rounded-[5px] shadow-md p-5 w-full border-[1px] border-[#C4CEDC]'>
           <h1 className="text-5xl font-mono text-white">Inventario</h1>
           <div>
@@ -69,9 +71,9 @@ const Inventary = () => {
                 {(column) =>
                   <TableColumn key={column.key}>{column.label}</TableColumn>}
               </TableHeader>
-              <TableBody items={state}>
+              <TableBody items={getData}>
                 {
-                  state?.map(user => (
+                  getData?.map(user => (
                     <TableRow key={user._id}>
 
                       {(columnKey) => {
@@ -92,6 +94,7 @@ const Inventary = () => {
         </div>
       </section>
     </Layout>
+
   );
 }
 

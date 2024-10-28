@@ -3,6 +3,7 @@ import ModalCreate from "../../components/modalCreate";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import Layout from "../Layout";
 
 
 const columns = [
@@ -47,43 +48,44 @@ const UsersVali = () => {
   }, []);
 
   return (
-    <div className="bg-[#1F6C4C]">
-      <section className="container mx-auto lg:h-[calc(100vh-4rem)] p-10  ">
-        <div className='bg-white  rounded-[5px] shadow-md p-5 w-full border-[1px] border-[#C4CEDC]'>
-          <h1 className="text-5xl font-mono text-black">Personal</h1>
-          <div>
-            <div className="flex justify-end p-1">
-              < ModalCreate close={info} isOpen={setInfo} placement="top-center" />
+    <Layout>
+        <section className="container mx-auto lg:h-[calc(100vh-4rem)] p-10  ">
+          <div className='bg-white  rounded-[5px] shadow-md p-5 w-full border-[1px] border-[#C4CEDC]'>
+            <h1 className="text-5xl font-mono text-black">Personal</h1>
+            <div>
+              <div className="flex justify-end p-1">
+                < ModalCreate close={info} isOpen={setInfo} placement="top-center" />
+              </div>
+              <Table aria-label="Example table with dynamic content">
+                <TableHeader columns={columns}
+                >
+                  {(column) =>
+                    <TableColumn key={column.key}>{column.label}</TableColumn>}
+                </TableHeader>
+                <TableBody items={state}>
+                  {
+                    state?.map(user => (
+                      <TableRow key={user._id}>
+
+                        {(columnKey) => {
+                          // if (columnKey === 'edit') return <TableCell><ModalCases data={data} close={info} isOpen={setInfo} /></TableCell>
+                          return <TableCell>{getKeyValue(user, columnKey)}</TableCell>
+                        }}
+
+                      </TableRow>
+                    ))
+
+                  }
+
+                </TableBody>
+              </Table>
+
+
             </div>
-            <Table aria-label="Example table with dynamic content">
-              <TableHeader columns={columns}
-              >
-                {(column) =>
-                  <TableColumn key={column.key}>{column.label}</TableColumn>}
-              </TableHeader>
-              <TableBody items={state}>
-                {
-                  state?.map(user => (
-                    <TableRow key={user._id}>
-
-                      {(columnKey) => {
-                        // if (columnKey === 'edit') return <TableCell><ModalCases data={data} close={info} isOpen={setInfo} /></TableCell>
-                        return <TableCell>{getKeyValue(user, columnKey)}</TableCell>
-                      }}
-
-                    </TableRow>
-                  ))
-
-                }
-
-              </TableBody>
-            </Table>
-
-
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+    </Layout>
+
   );
 }
 

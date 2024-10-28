@@ -4,7 +4,7 @@ import icon from '../assets/Logo.png'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const initialValues = { user: '', password: '' }
 
@@ -15,7 +15,7 @@ const Login = () => {
     const { handleSubmit, values, handleChange, handleBlur } = useFormik({
 
         initialValues,
-        onSubmit: async (value, { resetForm }) => {
+        onSubmit: async (value, ) => {
             const data = await axios.post('http://localhost:3000/auth', value)
 
             if (data.length !== 0) {
