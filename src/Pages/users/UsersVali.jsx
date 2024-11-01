@@ -1,9 +1,9 @@
 import { getKeyValue, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
-import ModalCreate from "../../components/modalCreate";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import Layout from "../Layout";
+import ModalUser from "../../components/ModalUser";
 
 
 const columns = [
@@ -11,6 +11,10 @@ const columns = [
   {
     key: "dni",
     label: "Cedula",
+  },
+  {
+    key: 'name',
+    label: 'Nombre'
   },
   {
     key: "post",
@@ -35,7 +39,7 @@ const UsersVali = () => {
 
   const loadGet = async () => {
 
-    const { data } = await axios.get('http://localhost:3000/user')
+    const { data } = await axios.get('http://localhost:3000/user',)
 
     return data
   }
@@ -54,7 +58,7 @@ const UsersVali = () => {
             <h1 className="text-5xl font-mono text-black">Personal</h1>
             <div>
               <div className="flex justify-end p-1">
-                < ModalCreate close={info} isOpen={setInfo} placement="top-center" />
+                < ModalUser close={info} isOpen={setInfo} placement="top-center" />
               </div>
               <Table aria-label="Example table with dynamic content">
                 <TableHeader columns={columns}

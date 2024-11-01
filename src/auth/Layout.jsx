@@ -1,7 +1,7 @@
 
 const Layout = ({children}) => {
     return (
-        <div className='bg-[#1F6C4C] h-screen'>
+        <div className='bg-[#293F00] h-screen'>
             {children}
         </div>
     );

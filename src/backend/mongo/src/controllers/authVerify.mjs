@@ -2,14 +2,15 @@ import { serve } from "../server/usuarios.mjs"
 
 export const authVerify = async (req, res) => {
 
-    const { user, password } = req?.body
+
+    const { dni, password } = req?.body
     try {
-        const data = await serve.findOne({ name: user })
-
-        if (data == null) return res.status(401).json({ res: 'Usuario o clave invalidos' })
-
+        const data = await serve.findOne({ dni: dni })
+        if (data == null) return res.status(401).json({ message: 'Usuario o clave invalidos' })
+        if(password !== data.password) return res.status(401).json({ message: 'Usuario o clave invalidos' })
+            
         return res.status(200).json({
-            res: rows
+            message: data
         });
 
     } catch (error) {

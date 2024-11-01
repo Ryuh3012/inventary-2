@@ -57,7 +57,7 @@ const Inventary = () => {
   return (
     <Layout>
       <section className="container mx-auto lg:h-[calc(100vh-4rem)] p-10">
-        <div className='bg-[#507142]  rounded-[5px] shadow-md p-5 w-full border-[1px] border-[#C4CEDC]'>
+        <div className='bg-[#574f09]  rounded-[5px] shadow-md p-5 w-full border-[1px] border-[#C4CEDC]'>
           <h1 className="text-5xl font-mono text-white">Inventario</h1>
           <div>
             <CardInfo />

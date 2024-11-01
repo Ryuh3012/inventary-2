@@ -2,7 +2,7 @@ import { serve } from "../server/usuarios.mjs"
 
 
 export const newUsers = async (req, res) => {
-    const data = await req?.body.data
+    const data = await req?.body
     const newUser = new serve(data)
     const resp = await newUser.save()
 

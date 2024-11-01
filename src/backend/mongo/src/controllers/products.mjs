@@ -52,7 +52,6 @@ export const userDelete = async (req, res) => {
     const { id } = await req.params
 
     const personas = await serve.deleteOne({ _id: id })
-    console.log(personas)
     return res.status(200).json({
 
         "message": `el usuario ha sido creado`

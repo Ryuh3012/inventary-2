@@ -2,45 +2,31 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import crear from "../assets/crear.png";
 import { useFormik } from "formik";
 import axios from "axios";
-import { registerValidate } from "../security/product/newProductsvalidate.mjs";
+import { registerValidate } from "../security/auth/RegisterValidate.mjs";
+import { useState } from "react";
 
-const initialValues = { name: '', dni: '', paymentType: '', prince: '', reference: '', date: '' }
-const methodPayArr = ['', 'pago movil', 'dolares', 'bolivares']
+const initialValues = { name: '', dni: "", post: '', vouchers: '', prince: "", password: "", date: "" }
+const Post = ['', 'cajero', 'admin']
 
-const ModalCreate = () => {
+const ModalUser = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { errors, touched, handleSubmit, handleChange, handleBlur, values: { name, dni, paymentType, prince, reference } } = useFormik({
+    const { errors, handleBlur, handleChange, handleSubmit, touched, values: { name, dni, post, vouchers, prince, password, date } } = useFormik({
 
         initialValues,
         onSubmit: async (value, { resetForm }) => {
-            const { name, dni, paymentType, prince, reference } = value
-            const date = new Date().toLocaleDateString()
             try {
-                const data = await axios.post('http://localhost:3000/product', {
-                    data: {
-                        name,
-                        dni,
-                        paymentType,
-                        prince,
-                        reference,
-                        date
-                    }
-                })
-                console.log(data)
+                const data = await axios.post('http://localhost:3000/user', value)
             } catch (error) {
                 console.log(error)
             }
-            window.location.replace('');
             return resetForm()
 
         },
-        validate: (values) => registerValidate( {values} )
+        validate: values => registerValidate({ values }),
 
     })
-    console.log(errors.name);
-
     return (
-        <>
+        <div >
 
             <Button className="bg-lime-300" onPress={onOpen}><img src={crear} className="w-[25px]" />Crear</Button>
 
@@ -48,31 +34,33 @@ const ModalCreate = () => {
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
-                        <div className=" bg-[#656c1e]">
+                        <div className="bg-[#1e3f6c]">
                             <ModalHeader className="flex justify-center font-bold text-2xl">Nuevo Registro</ModalHeader>
                             <form onSubmit={handleSubmit}>
                                 {(errors.name && touched.name) && (<p className="bg-red-600 pl-4 text-white rounded-[3px] py-1">{errors.name}</p>)}
                                 {(errors.dni && touched.dni) && (<p className="bg-red-600 pl-4 text-white rounded-[3px] py-1">{errors.dni}</p>)}
-                                {(errors.prince && touched.prince) && (<p className="bg-red-600 pl-4 text-white rounded-[3px] py-1">{errors.prince}</p>)}
+                                {(errors.password && touched.password) && (<p className="bg-red-600 pl-4 text-white rounded-[3px] py-1">{errors.password}</p>)}
 
-                                <ModalBody >
+                                <ModalBody>
+
                                     <div className="flex w-full gap-3">
                                         <div className='flex flex-col w-full gap-2'>
                                             <Input
+                                                label='Nombre'
+                                                type="text"
                                                 name="name"
-                                                label="Nombre"
                                                 value={name}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 required={true}
+
                                                 placeholder="Introduce el Nombre"
                                             />
-
                                         </div>
                                         <div className='flex flex-col w-full gap-2'>
                                             <Input
+                                                label='Cedula'
                                                 type="number"
-                                                label="cedula"
                                                 name="dni"
                                                 value={dni}
                                                 onChange={handleChange}
@@ -82,43 +70,29 @@ const ModalCreate = () => {
                                         </div>
 
                                     </div>
-                                    <div className='flex flex-col w-full gap-2'>
+                                    <div>
+                                        <Input
+                                            label='Contraseña'
+                                            type="password"
+                                            name="password"
+                                            value={password}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Introduce La contraseña"
+                                        />
+                                    </div>
+                                    <div>
 
                                         <Select
-                                            label="Tipo De Pago"
-                                            name="paymentType"
-                                            value={paymentType}
+                                            label="Cargo"
+                                            name="post"
+                                            value={post}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                         >
-                                            {methodPayArr.map(e => <SelectItem key={e}>{e}</SelectItem>)}
+                                            {Post.map(cargo => <SelectItem key={cargo}>{cargo}</SelectItem>)}
                                         </Select>
 
-                                    </div>
-                                    {
-                                        paymentType == 'pago movil' ?
-                                            <div>
-                                                <Input
-
-                                                    label="Referencia"
-                                                    type="text"
-                                                    name="reference"
-                                                    value={reference}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                />
-                                            </div>
-                                            : null
-                                    }
-                                    <div>
-                                        <Input
-                                            label='Monto'
-                                            type="number"
-                                            name="prince"
-                                            value={prince}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
                                     </div>
 
                                 </ModalBody>
@@ -135,8 +109,8 @@ const ModalCreate = () => {
                     )}
                 </ModalContent>
             </Modal>
-        </>
+        </div>
     )
 }
 
-export default ModalCreate;
+export default ModalUser;
