@@ -3,7 +3,12 @@ import Logo from '../assets/Logo.png'
 import exit from '../assets/salida.png'
 import { NavLink } from "react-router-dom";
 
+
 const Layout = ({ children }) => {
+
+
+    
+
     return (
         <div className='bg-[#d9dbe0] '>
             <Navbar
@@ -27,7 +32,7 @@ const Layout = ({ children }) => {
                         </NavLink>
                     </NavbarItem>
                     <NavbarItem className="hidden lg:flex">
-                        <NavLink className='px-5' to='/'> <img src={exit} className="w-[20px]" /> </NavLink>
+                        <NavLink   className='px-5' to='/'> <img src={exit} className="w-[20px]" /> </NavLink>
                     </NavbarItem>
                 </NavbarContent>
             </Navbar>

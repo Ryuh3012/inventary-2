@@ -37,7 +37,6 @@ const ModalCreate = () => {
         validate: (values) => registerValidate( {values} )
 
     })
-    console.log(errors.name);
 
     return (
         <>

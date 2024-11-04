@@ -3,10 +3,11 @@ import { Button, Input } from '@nextui-org/react';
 import icon from '../assets/Logo.png'
 import { useFormik } from 'formik';
 import axios from 'axios';
-import Cookies from 'universal-cookie';
 import { useNavigate } from "react-router-dom";
 import { loginValidate } from '../security/Login/ValidateLogin.mjs';
 import { useState } from 'react';
+import Cookies from 'universal-cookie';
+import RemoverCookis from '../hooks/RemoverCookis';
 
 const initialValues = { dni: '', password: '' }
 
@@ -20,7 +21,7 @@ const Login = () => {
 
         initialValues,
         onSubmit: async (value,) => {
-            const {data} = await axios.post('http://localhost:3000/auth', value)
+            const { data } = await axios.post('http://localhost:3000/auth', value)
                 .catch(({ response: { data: { message } } }) => {
                     setErrorInternal(message)
                     setTimeout(() => {
@@ -30,14 +31,15 @@ const Login = () => {
                 })
             if (data.length !== 0) {
                 const cookis = new Cookies()
+                cookis.remove('user')
                 cookis.set('user', JSON.stringify(data.message))
                 return navegation('/inventary')
             }
-
+            
 
         },
         validate: values => loginValidate({ values })
-
+        
     })
 
     return (
